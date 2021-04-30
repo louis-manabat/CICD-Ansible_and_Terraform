@@ -1,0 +1,12 @@
+FROM qawolf/qawolf:v0.9.2
+WORKDIR /usr/app
+
+COPY package*.json ./
+
+RUN npm install --verbose
+
+COPY . . 
+
+RUN ["chmod", "+x", "./e2e.sh"]
+## hack to get the container to run in the background for docker-compose
+CMD ["sleep", "30d"]

@@ -1,0 +1,13 @@
+version: 2.1
+
+jobs:
+  ci-build:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+
+workflows:
+  build-and-packge:
+    jobs:
+      - ci-build

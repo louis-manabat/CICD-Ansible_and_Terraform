@@ -1,0 +1,10 @@
+# .npmignore
+node_modules
+
+# Don't pack files for testing
+test
+.qawolf
+codecov.yml
+e2e.sh
+jest.config.js
+qawolfdockerfile
