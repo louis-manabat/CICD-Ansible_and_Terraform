@@ -1,3 +1,19 @@
+## Student: Louis Manabat
+**ID: s3719633**
+
+### Analysis of the problem
+
+
+### Explain and justify the solution
+
+
+### How to deploy the solutiion
+
+
+
+
+# About Simple Todo App
+
 # Simple Todo App with MongoDB, Express.js and Node.js
 The ToDo app uses the following technologies and javascript libraries:
 * MongoDB
