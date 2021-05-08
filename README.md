@@ -1,3 +1,32 @@
+## Student: Louis Manabat
+**ID: s3719633**
+
+### Analysis of the problem
+The process of creating an artefact has been automated to make it easier for the development team. With this now out of the way, there are new challenges that they face which is deploying the solution. There is a lot of manual workload present, which also means a lot of room for human error.
+
+### Explain and justify the solution
+The solution uses several tools to deploy the solution. The process will be semi-automated in the sense that the infrastructure and deployment will be fully automated, but to get it running, several Makefile commands need to be run to fully deploy the solution.
+
+Tools:
+GitHub: This is where the repository for the solution and the automation code will be stored on. In a further implementation of automating the process, CircleCI will be linked to GitHub to do CI/CD (Continuous Integration & Continuous Deployment)
+
+Terraform: Terraform is the tool that automates the creation and updating of AWS services to help ease the process, and removes the need of having to create the services using manual labour. With this, it will lower the chances of using too many resources, meaning the company will save money, which then also means the company will gain a higher profit, which increases the satisfaction of the client. 
+
+Ansible AWS: Ansible is the tool that deploys the solution onto an AWS EC2 virtual machine instance using what they call an automation playbook. This uses the services Terraform has created for Ansible to use and deploy the solution on. The means that any errors from manual labour are diminished, allowing a smoother process of deploying the solution to AWS.
+
+AWS: This is the service where the client wants to deploy the solution onto. Services such as an EC2 virtual machine instance, VPCs, S3 buckets and DynamoDB will be used to help run the Todo App solution when it is deployed.
+
+CircleCI: CircleCI was used to automate the packing of the artefact, from doing linting and vulnerability checks to making a packed solution. It will also be used to fully automate the deployment process.
+
+
+
+### How to deploy the solutiion
+
+
+
+
+# About Simple Todo App
+
 # Simple Todo App with MongoDB, Express.js and Node.js
 The ToDo app uses the following technologies and javascript libraries:
 * MongoDB
