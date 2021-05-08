@@ -2,7 +2,7 @@
 **ID: s3719633**
 
 ### Analysis of the problem
-
+The process of creating an artefact has been automated to make it easier on the development team. With this now out of the way, there are new challenges that they face which is deploying the solution. A lot of manual workload is here and that also means a lot of room for human error.
 
 ### Explain and justify the solution
 
