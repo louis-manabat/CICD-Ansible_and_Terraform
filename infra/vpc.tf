@@ -125,3 +125,33 @@ resource "aws_subnet" "data_az3" {
     Name = "a2-data-az3"
   }
 }
+
+resource "aws_lb" "todo_app_lb" {
+  name               = "todo-app-lb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.allow_http_ssh.id]
+  subnets            = [aws_subnet.public_az1.id, aws_subnet.public_az2.id, aws_subnet.public_az3.id]
+
+  tags = {
+    Environment = "production"
+  }
+}
+
+resource "aws_lb_target_group" "todo_app_lb_tg" {
+  name     = "todo-app-lb-target-group"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.vpc.id
+}
+
+resource "aws_lb_listener" "todo_app_lb_listener" {
+  load_balancer_arn = aws_lb.todo_app_lb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.todo_app_lb_tg.arn
+  }
+}
