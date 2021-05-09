@@ -125,3 +125,15 @@ resource "aws_subnet" "data_az3" {
     Name = "a2-data-az3"
   }
 }
+
+resource "aws_lb" "todo-app-lb" {
+  name               = "todo-app-lb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.allow_http_ssh.id]
+  subnets            = [aws_subnet.public_az1.id, aws_subnet.public_az2.id, aws_subnet.public_az3.id]
+
+  tags = {
+    Environment = "production"
+  }
+}
