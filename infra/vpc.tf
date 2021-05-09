@@ -126,7 +126,7 @@ resource "aws_subnet" "data_az3" {
   }
 }
 
-resource "aws_lb" "todo-app-lb" {
+resource "aws_lb" "todo_app_lb" {
   name               = "todo-app-lb"
   internal           = false
   load_balancer_type = "application"
@@ -136,4 +136,11 @@ resource "aws_lb" "todo-app-lb" {
   tags = {
     Environment = "production"
   }
+}
+
+resource "aws_lb_target_group" "todo_app_lb_tg" {
+  name     = "todo-app-lb-target-group"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.vpc.id
 }
