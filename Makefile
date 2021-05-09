@@ -1,8 +1,10 @@
 .PHONY: up down tf-validate bootstrap ssh-gen tf-init pack
 
 up:
+	cd infra && terraform init
 
 down:
+	cd infra && terraform destroy --auto-approve
 
 tf-plan:
 	cd infra && terraform plan
