@@ -2,7 +2,12 @@
   hosts: all
 
   tasks: 
-    - name: Create a file called '/tmp/testfile.txt' with the content 'hello world'.
-      copy:
-        content: hello worldn
-        dest: /tmp/testfile.txt
+    # - name: Create a file called '/tmp/testfile.txt' with the content 'hello world'.
+    #   copy:
+    #     content: hello worldn
+    #     dest: /tmp/testfile.txt
+    - name: Extract simpletodoapp-#.#.#.tgz into /etc/
+      ansible.builtin.unarchive:
+        src: /files/simpletodoapp-1.0.1.tgz
+        dest: /etc/simpletodoapp-1.0.1
+        remote_src: yes
