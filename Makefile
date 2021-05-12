@@ -5,6 +5,7 @@ up:
 	
 down:
 	cd infra && terraform destroy --auto-approve
+	cd bootstrap && terraform destroy --auto-approve
 
 tf-plan:
 	cd infra && terraform plan
