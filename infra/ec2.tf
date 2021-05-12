@@ -34,9 +34,15 @@ resource "aws_lb_listener" "todo_app_lb_listener" {
 }
 
 resource "aws_instance" "todo_app_ec2" {
-  ami             = "ami-0d5eff06f840b45e9"
-  instance_type   = "t2.micro"
-  security_groups = [aws_security_group.allow_http_ssh.id]
-  key_name        = aws_key_pair.deployer.key_name
-  subnet_id       = aws_subnet.private_az1.id
+  ami                         = "ami-0d5eff06f840b45e9"
+  instance_type               = "t2.micro"
+  subnet_id                   = aws_subnet.private_az1.id
+  associate_public_ip_address = true
+  key_name                    = aws_key_pair.deployer.key_name
+  security_groups             = [aws_security_group.allow_http_ssh.id]
+  count                       = 1
+
+  tags = {
+    Name = "TodoApp"
+  }
 }
