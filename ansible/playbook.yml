@@ -1,17 +1,22 @@
 - name: Deploy Simple Todo app on EC2 instance
   hosts: all
+  vars:
+    dir_name: "simpletodoapp-1.0.1"
 
   tasks: 
     - name: Create simpletodoapp directory in /etc if it does not exist
       file:
         path: /etc/simpletodoapp
         state: directory
-        mode: '0755'
       become: yes
       
     - name: Extract simpletodoapp-#.#.#.tgz into /etc/simpletodoapp
       unarchive:
-        src: files/simpletodoapp-1.0.1.tgz
+        src: "files/{{ dir_name }}.tgz"
         dest: /etc/simpletodoapp
       become: yes
-       
+
+    - name: Rename package directory to app name and version
+      shell: |
+        mv "/etc/simpletodoapp/package" "/etc/simpletodoapp/{{ dir_name }}"
+      become: yes
