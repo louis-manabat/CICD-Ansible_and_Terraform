@@ -1,4 +1,4 @@
-- name: Deploy Application
+- name: Deploy Simple Todo app on EC2 instance
   hosts: all
 
   tasks: 
@@ -7,7 +7,7 @@
     #     content: hello worldn
     #     dest: /tmp/testfile.txt
     - name: Extract simpletodoapp-#.#.#.tgz into /etc/
-      ansible.builtin.unarchive:
+      unarchive:
         src: /files/simpletodoapp-1.0.1.tgz
         dest: /etc/simpletodoapp-1.0.1
         remote_src: yes
