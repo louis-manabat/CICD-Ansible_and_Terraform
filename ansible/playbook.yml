@@ -5,18 +5,22 @@
 
   tasks: 
     - name: Create simpletodoapp directory in /etc if it does not exist
+      become: yes
       file:
         path: /etc/simpletodoapp
         state: directory
-      become: yes
       
     - name: Extract simpletodoapp-#.#.#.tgz into /etc/simpletodoapp
+      become: yes
       unarchive:
         src: "files/{{ dir_name }}.tgz"
         dest: /etc/simpletodoapp
-      become: yes
 
-    - name: Rename package directory to app name and version
-      shell: |
-        mv "/etc/simpletodoapp/package" "/etc/simpletodoapp/{{ dir_name }}"
+    - name: Updating system and installing dependencies
       become: yes
+      shell: |
+        sudo yum update -y
+        sudo yum upgrade -y
+        sudo yum install -y gcc-c++ make -y
+        curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash -
+        sudo yum install -y nodejs
