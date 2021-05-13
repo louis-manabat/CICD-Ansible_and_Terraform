@@ -2,25 +2,17 @@
   hosts: all
 
   tasks: 
-    # - name: Create a file called '/tmp/testfile.txt' with the content 'hello world'.
-    #   copy:
-    #     content: hello worldn
-    #     dest: /tmp/testfile.txt
-    - name: Create simpletodoapp directory in root if it does not exist
+    - name: Create simpletodoapp directory in /etc if it does not exist
       file:
-        path: ~/simpletodoapp
+        path: /etc/simpletodoapp
         state: directory
         mode: '0755'
       become: yes
       
-    - name: Extract simpletodoapp-#.#.#.tgz into ~/simpletodoapp
+    - name: Extract simpletodoapp-#.#.#.tgz into /etc/simpletodoapp
       unarchive:
         src: files/simpletodoapp-1.0.1.tgz
-        # src: /files/simpletodoapp-1.0.1.tgz
-        # src:  ./files/simpletodoapp-1.0.1.tgz
-        # src: simpletodoapp-1.0.1.tgz
-        # src: ansible/files/simpletodoapp-1.0.1.tgz
-        dest: ~/simpletodoapp
-        remote_src: yes
+        dest: /etc/simpletodoapp
+        # remote_src: yes
       become: yes
        
