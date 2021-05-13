@@ -13,6 +13,5 @@
       unarchive:
         src: files/simpletodoapp-1.0.1.tgz
         dest: /etc/simpletodoapp
-        # remote_src: yes
       become: yes
        
