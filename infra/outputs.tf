@@ -13,6 +13,11 @@ output "docdb_endpoint" {
   value       = aws_docdb_cluster.docodb.endpoint
 }
 
+output "docdb_port" {
+  description = "The port for the DocDB instance"
+  value       = aws_docdb_cluster.docodb.port
+}
+
 output "docdb_username" {
   description = "The username for the DocDB instance"
   value       = aws_docdb_cluster.docodb.master_username
