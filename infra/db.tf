@@ -12,4 +12,5 @@ resource "aws_docdb_cluster" "docodb" {
   skip_final_snapshot     = true
   vpc_security_group_ids  = [aws_security_group.dbsc.id]
   db_subnet_group_name    = aws_db_subnet_group.dbs.name
+  db_cluster_parameter_group_name = "tls-disable"
 }
