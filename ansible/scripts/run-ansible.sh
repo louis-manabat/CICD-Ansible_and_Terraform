@@ -23,7 +23,7 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
-Environment="DB_URL=$docdb_url"
+Environment=DB_URL=$docdb_url
 Environment=SESSION_SECRET=secret
 WorkingDirectory=
 Type=simple
