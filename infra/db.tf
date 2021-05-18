@@ -7,7 +7,7 @@ resource "aws_docdb_cluster" "docodb" {
   engine                          = "docdb"
   master_username                 = "mongousername"
   master_password                 = "mongopassword"
-  port                            = 5432
+  port                            = 27017
   backup_retention_period         = 1
   skip_final_snapshot             = true
   vpc_security_group_ids          = [aws_security_group.dbsc.id]
