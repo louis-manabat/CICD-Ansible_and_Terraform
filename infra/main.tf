@@ -8,15 +8,15 @@ resource "aws_security_group" "dbsc" {
 
   ingress {
     description = "documentdb from vpc"
-    from_port   = 5432
-    to_port     = 5432
+    from_port   = 27017
+    to_port     = 27017
     protocol    = "tcp"
     cidr_blocks = [aws_vpc.vpc.cidr_block]
   }
 
   egress {
-    from_port   = 0
-    to_port     = 0
+    from_port   = 27017
+    to_port     = 27017
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -38,6 +38,22 @@ resource "aws_security_group" "allow_http_ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "allow_http_ssh"
+  }
+}
+
+# loadbal sec group http for 80 ["0.0.0.0/0"]
+# instance sec group 22 and 5000 [aws_vpc.vpc.cidr_block]
+
+resource "" "name" {
   ingress {
     description = "SSH from internet"
     from_port   = 22
@@ -51,9 +67,5 @@ resource "aws_security_group" "allow_http_ssh" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "allow_http_ssh"
   }
 }
