@@ -20,14 +20,27 @@
         src: "files/simpletodoapp-1.0.1.tgz"
         dest: /etc/app/dist
 
-    - name: Updating system and installing dependencies
+    - name: Updating system
+      become: yes
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Installing nodejs setup file
       become: yes
       shell: |
-        sudo yum update -y
-        sudo yum upgrade -y
-        sudo yum install gcc-c++ make -y
         curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash -
-        sudo yum install -y nodejs
+
+    - name: Installing nodejs deps
+      become: yes
+      package:
+        name: "{{ packages }}"
+      vars:
+        packages:
+          - gcc-c++
+          - make
+          - curl
+          - nodejs
 
     - name: Installing Node dependencies
       become: yes
