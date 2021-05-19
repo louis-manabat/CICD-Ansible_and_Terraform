@@ -12,6 +12,7 @@
       file:
         path: /etc/app/dist
         state: directory
+        mode: '0755'
 
     - name: Extract simpletodoapp-#.#.#.tgz into /etc/app/dist
       become: yes
@@ -44,5 +45,4 @@
       become: yes
       service:
         name: simpletodoapp
-        state: enabled
-        enable: yes
+        state: started
