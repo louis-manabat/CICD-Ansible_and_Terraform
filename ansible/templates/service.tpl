@@ -8,5 +8,5 @@ Environment=DB_URL=mongodb://{{ db_username }}:{{ db_password }}@{{ db_endpoint 
 Environment=SESSION_SECRET=secret
 WorkingDirectory=/etc/app/dist
 Type=simple
-ExecStart=/etc/app/dist/package
+ExecStart=/usr/bin/node /etc/app/dist/package/server.js
 Restart=on-failure
