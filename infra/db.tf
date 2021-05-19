@@ -1,3 +1,27 @@
+resource "aws_security_group" "dbsc" {
+  description = "Allow document DB traffic"
+  vpc_id      = aws_vpc.vpc.id
+
+  ingress {
+    description = "documentdb from vpc"
+    from_port   = 27017
+    to_port     = 27017
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.vpc.cidr_block]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "allow-docdb-traffic"
+  }
+}
+
 resource "aws_db_subnet_group" "dbs" {
   subnet_ids = [aws_subnet.data_az1.id, aws_subnet.data_az2.id, aws_subnet.data_az3.id]
 }
