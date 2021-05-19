@@ -7,7 +7,7 @@ resource "aws_lb" "todo_app_lb" {
   name               = "todo-app-lb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.allow_http_ssh.id]
+  security_groups    = [aws_security_group.allow_http_ssh.id] # update this sec group
   subnets            = [aws_subnet.public_az1.id, aws_subnet.public_az2.id, aws_subnet.public_az3.id]
 
   tags = {
@@ -39,7 +39,7 @@ resource "aws_instance" "todo_app_ec2" {
   subnet_id                   = aws_subnet.private_az1.id
   associate_public_ip_address = true
   key_name                    = aws_key_pair.deployer.key_name
-  security_groups             = [aws_security_group.allow_http_ssh.id]
+  security_groups             = [aws_security_group.allow_http_ssh.id] # update this sec group
   count                       = 1
 
   tags = {
