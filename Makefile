@@ -2,7 +2,7 @@
 
 up:
 	cd infra && terraform apply --auto-approve
-	# cd ansible && ./scripts/run-ansible.sh
+	cd ansible && ./scripts/run-ansible.sh
 	
 down:
 	cd infra && terraform destroy --auto-approve
