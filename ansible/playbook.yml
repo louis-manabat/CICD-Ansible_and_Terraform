@@ -14,11 +14,18 @@
         state: directory
         mode: '0755'
 
+    - name: Copy the zipped solution into /tmp
+      become: yes
+      copy:
+        src: "files/simpletodoapp-1.0.1.tgz"
+        dest: /tmp/simpletodoapp-1.0.1.tgz
+
     - name: Extract simpletodoapp-#.#.#.tgz into /etc/app/dist
       become: yes
       unarchive:
-        src: "files/simpletodoapp-1.0.1.tgz"
+        src: /tmp/simpletodoapp-1.0.1.tgz
         dest: /etc/app/dist
+        remote_src: yes
 
     - name: Updating system
       become: yes
