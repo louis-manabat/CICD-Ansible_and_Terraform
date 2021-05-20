@@ -2,12 +2,12 @@
 set +ex
 
 ## Hacky way to build inventory file
-echo "all:" > scripts/inventory.yml
-echo "  hosts:" >> scripts/inventory.yml
-echo "    "$(cd ../infra && terraform output instance_public_ip) >> scripts/inventory.yml
+echo "all:" > inventory.yml
+echo "  hosts:" >> inventory.yml
+echo "    "$(cd ../infra && terraform output instance_public_ip) >> inventory.yml
 
 ## Running ansible-playbook and parsing docdb variables
-ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i scripts/inventory.yml \
+ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i inventory.yml \
                                                 -u ec2-user playbook.yml \
                                                 --private-key ~/keys/ec2-key \
                                                 -e db_endpoint=$(cd ../infra && terraform output docdb_endpoint | tr -d '"') \
