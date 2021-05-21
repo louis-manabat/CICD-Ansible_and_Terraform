@@ -20,13 +20,11 @@ CircleCI: CircleCI was used to automate the packing of the artefact, from doing 
 
 
 
-## How to deploy the solution
-
-The deployment of the Simple Todo App is a bit of a lengthy process, but is relatively easy once you get into it.
+## How to deploy the solutiion
 
 Please note before getting started you must have an AWS account to get started. The way this tutorial will do it will differ from how you may do it, so please keep that in mind.
 
-## Pre-requisites
+### Pre-requisites
 
 Before we get started, please make sure the following packages are installed:
 1. curl
