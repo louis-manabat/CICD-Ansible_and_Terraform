@@ -1,8 +1,68 @@
-- name: Deploy Application
+- name: Deploy Simple Todo app on EC2 instance
   hosts: all
+  vars:
+    db_endpoint: ""
+    db_username: ""
+    db_password: ""
+    db_port: ""
 
-  tasks: 
-    - name: Create a file called '/tmp/testfile.txt' with the content 'hello world'.
+  tasks:
+    - name: Create app/dist directory in /etc if it does not exist
+      become: yes
+      file:
+        path: /etc/app/dist
+        state: directory
+        mode: '0755'
+
+    - name: Copy the zipped solution into /tmp
+      become: yes
       copy:
-        content: hello worldn
-        dest: /tmp/testfile.txt
+        src: "files/simpletodoapp-1.0.1.tgz"
+        dest: /tmp/simpletodoapp-1.0.1.tgz
+
+    - name: Extract simpletodoapp-#.#.#.tgz into /etc/app/dist
+      become: yes
+      unarchive:
+        src: /tmp/simpletodoapp-1.0.1.tgz
+        dest: /etc/app/dist
+        remote_src: yes
+
+    - name: Updating system
+      become: yes
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Installing nodejs setup file
+      become: yes
+      shell: |
+        curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash -
+
+    - name: Installing nodejs deps
+      become: yes
+      package:
+        name: "{{ packages }}"
+      vars:
+        packages:
+          - gcc-c++
+          - make
+          - curl
+          - nodejs
+
+    - name: Installing Node dependencies
+      become: yes
+      shell: |
+        cd /etc/app/dist/package
+        sudo npm install
+
+    - name: Create the service file from the template
+      become: yes
+      template:
+        src: templates/service.tpl
+        dest: /usr/lib/systemd/system/simpletodoapp.service
+
+    - name: Start and enable the simpletodoapp service
+      become: yes
+      service:
+        name: simpletodoapp
+        state: started
