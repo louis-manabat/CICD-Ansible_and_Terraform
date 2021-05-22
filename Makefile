@@ -4,21 +4,21 @@ install-deps:
 	sudo apt install vim curl wget dos2unix -y
 
 install-nodejs:
-	cd /tmp/
-	curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-	sudo apt-get install nodejs -y
+	cd /tmp && \
+	curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && \
+	sudo apt-get install nodejs -y && \
 
 install-tf:
-	cd /tmp/
-	wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip
-	unzip terraform_0.15.4_linux_amd64.zip
+	cd /tmp && \
+	wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip && \
+	unzip terraform_0.15.4_linux_amd64.zip && \
 	sudo mv terraform /usr/local/bin
 
 install-ansible:
-	cd /tmp/
-	sudo apt install software-properties-common -y
-	sudo add-apt-repository --yes --update ppa:ansible/ansible
-	sudo apt install ansible -y
+	cd /tmp && \
+	sudo apt install software-properties-common -y && \
+	sudo add-apt-repository --yes --update ppa:ansible/ansible && \
+	sudo apt install ansible -y && \
 
 up:
 	cd infra && terraform apply --auto-approve
