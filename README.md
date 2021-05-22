@@ -1,7 +1,26 @@
 # Student: Louis Manabat (ID: s3719633)
 
 ## Contents Page:
+- [Analysis and Solution](#Analysis-and-Solution)
+    - [Analysis of the problem](#Analysis-of-the-problem)
+    - [Explain and justify the solution](#Explain-and-justify-the-solution)
+- [How to deploy the solutiion](#How-to-deploy-the-solutiion)
+    - [Pre-requisites](#Pre-requisites)
+        - [Manual installations](#Manual-installation)
+        - [Semi-automatic installation](#Semi-automatic-installation)
+    - [Setting up AWS Credentials](#Setting-up-AWS-Credentials)
+    - [Running commands](#Running-commands)
+        - [Pack](#Pack)
+        - [SSH-key generation](#SSH-key-generation)
+        - [Bootstrap](#Bootstrap)
+        - [Initialise Terraform Repo](#Initialise-Terraform-Repo)
+        - [Validate and Format](#Validate-and-Format)
+        - [Terraform plan](#Terraform-plan)
+        - [Deploy solution](#Deploy-solution)
+        - [Get IP address/Link](#Get-IP-address/Link)
+        - [Undeploy Solution](#Undeploy-Solution)
 
+# Analysis and Solution
 ## Analysis of the problem
 The process of creating an artefact has been automated to make it easier for the development team. With this now out of the way, there are new challenges that they face which is deploying the solution. There is a lot of manual workload present, which also means a lot of room for human error.
 
@@ -19,11 +38,11 @@ AWS: This is the service where the client wants to deploy the solution onto. Ser
 
 CircleCI: CircleCI was used to automate the packing of the artefact, from doing linting and vulnerability checks to making a packed solution. It will also be used to fully automate the deployment process.
 
-## How to deploy the solutiion
+# How to deploy the solutiion
 
 Please note before getting started you must have an AWS account to get started. The way this tutorial will do it will differ from how you may do it, so please keep that in mind. We will be running this in VirtualBox using an Ubuntu 20.04 image.
 
-### Pre-requisites
+## Pre-requisites
 
 Before we get started, please make sure the following packages are installed:
 1. curl
@@ -36,9 +55,9 @@ Before we get started, please make sure the following packages are installed:
 
 You may choose to install these packages [**manually**](#Manual-installation), or do it [**automatically**](#Semi-automatic-installation) via the make command
 
-### Manual installation
+## Manual installation
 ##### Please note that each line is a new command
-#### Updating system 
+### Updating system 
     sudo apt update -y
     sudo apt upgrade -y
     sudo apt install curl make wget vim dos2unix -y
@@ -59,9 +78,9 @@ You may choose to install these packages [**manually**](#Manual-installation), o
     sudo apt install ansible -y
 
 
-### Semi-automatic installation
+## Semi-automatic installation
 ##### Please note that each line is a new command
-#### Please run this command before starting the rest of the process
+### Please run this command before starting the rest of the process
     sudo apt update -y
     sudo apt upgrade -y
     sudo apt install make -y
@@ -73,7 +92,7 @@ You may choose to install these packages [**manually**](#Manual-installation), o
     make install-ansible
 
 
-### Setting up AWS Credentials
+## Setting up AWS Credentials
 ##### Please note we will being using AWS Educate for this example
 
 First login into AWS Educate and press the **My Classrooms** tab at the top. Find the course you are currently in and press the blue **Go to classroom** button on the right. Press **Continue** on the prompt that appears
@@ -82,14 +101,88 @@ First login into AWS Educate and press the **My Classrooms** tab at the top. Fin
 Upon entering the next page, press the **Account Details** button and you will be greeted with a bunch of credentials. Copy the entire set of text in the gray box as we will be using this for later. 
 ### Please note that these credentials should only be used by you and you only! Do not share this with anyone else
 <br>
-<img src="readme-images/aws-account-status.png" alt="AWS-Edu-MyClass" width=50% height=50%>
-<img src="readme-images/aws-credentials.png" alt="AWS-Edu-MyClass" width=50% height=50%>
+<img src="readme-images/aws-account-status.png" alt="AWS-acc-status" width=50% height=50%>
+<img src="readme-images/aws-credentials.png" alt="AWS-creds" width=50% height=50%>
 <br>
 
 After doing this, open up a new tab in your terminal and run the command `mkdir ~/.aws` then run `vim ~/.aws/credentials` then press **INS** to activate insert mode then **Shift + INS** to paste the credentials. Follow this up with pressing **CTRL + C** then type in `:wq` to save and exit vim.
 <br>
-<img src="readme-images/aws-credentials-vim.png" alt="AWS-Edu-MyClass" width=50% height=50%>
-<img src="readme-images/aws-credentials-vim-2.png" alt="AWS-Edu-MyClass" width=50% height=50%>
+<img src="readme-images/aws-credentials-vim.png" alt="AWS-cred-vim" width=50% height=50%>
+<img src="readme-images/aws-credentials-vim-2.png" alt="AWS-cred-vim-2" width=50% height=50%>
+
+## Running commands
+After finishing the dependencies, go back into the root directory of the GitHub repository (where you have gotten this document you are reading) and enter the following commands:\
+
+### Pack
+The following command will pack and zip the solution into a tgz directory, which will be in the *ansible/files* directory.
+
+    make pack
+
+### SSH-key generation
+The following command will create a SSH key which will be used when connecting to the Terraform infrastructure Virtual Machine later on.
+
+    make ssh-gen
+
+### Bootstrap
+The following command will initialise and apply the Bootstrap code for DynamoDB, S3 bucket and option group for DynamoDB. You will only need to run this command once until you run [`make down`(#down)] (which we will cover later on).
+
+    make bootstrap
+You should get an output like this upon succession.
+<br>
+<img src="readme-images/tf-bootstrap.png" alt="AWS-tf-bootstrap" width=50% height=50%>
+
+### Initialise Terraform Repo
+The following command will initialise and apply the infrastructure code that will run the solution. You will only need to run this command once until you run [`make down`(#down)] (which we will cover later on).
+
+    make tf-init
+You should get an output like this upon succession.
+<br>
+<img src="readme-images/tf-init.png" alt="AWS-tf-init" width=50% height=50%>
+
+### Validate and Format
+The following command will check, validate and format the code. You will need to run this everytime you update your code.
+
+    make tf-validate
+You should get an output like this (or similar) upon succession. If not, go through the errors that are showing and re-run the `make tf-validate` command.
+<img src="readme-images/tf-validate.png" alt="AWS-tf-validate" width=50% height=50%>
+
+### Terraform plan
+The following command will plan the code in a way that AWS will understand it prior to deploying the services to it. Please note that errors may appear and you will need to fix said errors then run [`make tf-validate`](#Validate-and-Format).
+
+    make tf-plan
+You should get an output like this upon succession. If not, go through the errors that are showing and re-run the `make tf-validate` command.
+<img src="readme-images/tf-plan.png" alt="AWS-tf-plan" width=50% height=50%>
+
+### Deploy solution
+The following command will create the services on AWS then deploy the solution to the EC2 instance automatically. Please note if you get an error while deploying the services, it will instantly cancel the make command, meaning you need to fix the Terraform code up. You will need to run [`make tf-validate`](#Validate-and-Format) ***then*** [`make tf-plan`](#Terraform-plan).
+
+    make up
+You should see this first when successfully completing the deploying of services.
+<br>
+<img src="readme-images/make-up-tf.png" alt="make-up-tf" width=50% height=50%>
+<br>
+Then you should see this output (or similar) once the deployment of the solution is completed.
+<br>
+<img src="readme-images/make-up-ansible.png" alt="make-up-ansible" width=50% height=50%>
+
+#### Please note If you do update the code after successfully running [`make up`](#Deploy-solution), you will need to re-run [`make tf-validate`](#Validate-and-Format) ***then*** [`make tf-plan`](#Terraform-plan) ***then*** [`make up`](#Deploy-solution)
+
+### Get IP address/Link
+The following command will get you the link and the IP address to access the solution online. 
+
+### Undeploy Solution
+The following command will destroy all AWS service, meaning the solution will not be avaliable to access. If you want to redeploy the solution, run [`make bootstrap`](#Bootstrap) ***then*** [`make tf-init`](#Initialise-Terraform-Repo) ***then*** [`make tf-validate`](#Validate-and-Format) ***then*** [`make tf-plan`](#Terraform-plan) ***then*** [`make up`](#Deploy-solution).
+
+    make down
+Successfully running the command should give these two outputs.
+<br>
+Infrastructure
+<br>
+<img src="readme-images/down-tf.png" alt="down-tf" width=30% height=30%>
+<br>
+Bootstrap
+<br>
+<img src="readme-images/down-bootstrap.png" alt="down-bootstrap" width=30% height=30%>
 
 # About Simple Todo App
 
