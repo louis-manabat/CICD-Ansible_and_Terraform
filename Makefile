@@ -1,9 +1,7 @@
 .PHONY: up down tf-validate bootstrap ssh-gen tf-init pack install-ansible
 
 install-deps:
-	sudo apt update -y
-    sudo apt upgrade -y
-    sudo apt install curl make wget dos2unix -y
+    sudo apt install vim curl wget dos2unix -y
 
 install-nodejs:
 	cd /tmp/
