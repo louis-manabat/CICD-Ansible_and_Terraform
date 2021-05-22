@@ -1,9 +1,32 @@
-.PHONY: up down tf-validate bootstrap ssh-gen tf-init pack
+.PHONY: up down tf-validate bootstrap ssh-gen tf-init pack install-ansible
+
+output:
+	cd infra && terraform output
+
+install-deps:
+	sudo apt install vim curl wget dos2unix -y
+
+install-nodejs:
+	cd /tmp && \
+	curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && \
+	sudo apt-get install nodejs -y && \
+
+install-tf:
+	cd /tmp && \
+	wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip && \
+	unzip terraform_0.15.4_linux_amd64.zip && \
+	sudo mv terraform /usr/local/bin
+
+install-ansible:
+	cd /tmp && \
+	sudo apt install software-properties-common -y && \
+	sudo add-apt-repository --yes --update ppa:ansible/ansible && \
+	sudo apt install ansible -y && \
 
 up:
 	cd infra && terraform apply --auto-approve
-	cd ansible && ./scripts/run-ansible.sh
-	
+	cd ansible && dos2unix ./scripts/run-ansible.sh && ./scripts/run-ansible.sh
+
 down:
 	cd infra && terraform destroy --auto-approve
 	cd bootstrap && terraform destroy --auto-approve
