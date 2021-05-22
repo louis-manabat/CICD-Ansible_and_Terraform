@@ -1,5 +1,10 @@
 .PHONY: up down tf-validate bootstrap ssh-gen tf-init pack
 
+install-deps:
+	sudo apt update -y
+    sudo apt upgrade -y
+    sudo apt install curl make wget dos2unix -y
+
 up:
 	cd infra && terraform apply --auto-approve
 	cd ansible && ./scripts/run-ansible.sh
