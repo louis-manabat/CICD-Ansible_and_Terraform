@@ -30,13 +30,14 @@ Before we get started, please make sure the following packages are installed:
 1. curl
 2. wget
 3. make
-4. Terraform
-5. Ansible 
+4. dos2unix
+5. Terraform
+6. Ansible 
 
 ### Updating system 
     sudo apt update -y
     sudo apt upgrade -y
-    sudo apt install curl make wget -y
+    sudo apt install curl make wget dos2unix -y
 
 ### Installing Node.js (For NPM)
     curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
