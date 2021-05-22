@@ -34,9 +34,10 @@ Before we get started, please make sure the following packages are installed:
 6. Terraform
 7. Ansible 
 
-You may choose to install these packages [**manually**](#Manual-installation-(Each-line-is-a-new-command)), or do it [**automatically**](#Semi-automatic-installation-(Each-line-is-a-new-command)) via the make command
+You may choose to install these packages [**manually**](#Manual-installation), or do it [**automatically**](#Semi-automatic-installation) via the make command
 
-### Manual installation (Each line is a new command)
+### Manual installation
+##### Please note that each line is a new command
 #### Updating system 
     sudo apt update -y
     sudo apt upgrade -y
@@ -59,7 +60,7 @@ You may choose to install these packages [**manually**](#Manual-installation-(Ea
 
 
 ### Semi-automatic installation (Each line is a new command)
-
+##### Please note that each line is a new command
 #### Please run this command before starting the rest of the process
     sudo apt update -y
     sudo apt upgrade -y
@@ -73,8 +74,16 @@ You may choose to install these packages [**manually**](#Manual-installation-(Ea
 
 
 ### Setting up AWS Credentials
+##### Please note we will being using AWS Educate for this example
 
+First login into AWS Educate and press the **My Classrooms** tab at the top. Find the course you are currently in and press the blue **Go to classroom** button on the right. Press **Continue** on the prompt that appears
+<img src="readme-images/aws-edu-myclass.png" alt="AWS-Edu-MyClass" width=50% height=50%>
 
+Upon entering the next page, press the **Account Details** button and you will be greeted with a bunch of credentials. Copy the entire set of text in the gray box as we will be using this for later. 
+### Please note that these credentials should only be used by you and you only! Do not share this with anyone else
+<br>
+<img src="readme-images/aws-account-status.png" alt="AWS-Edu-MyClass" width=50% height=50%>
+<img src="readme-images/aws-credentials.png" alt="AWS-Edu-MyClass" width=50% height=50%>
 
 # About Simple Todo App
 
