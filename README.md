@@ -168,7 +168,16 @@ Then you should see this output (or similar) once the deployment of the solution
 #### Please note If you do update the code after successfully running [`make up`](#Deploy-solution), you will need to re-run [`make tf-validate`](#Validate-and-Format) ***then*** [`make tf-plan`](#Terraform-plan) ***then*** [`make up`](#Deploy-solution)
 
 ### Get IP address/Link
-The following command will get you the link and the IP address to access the solution online. 
+The following command will get you the link and the IP address to access the solution online.
+
+    make output
+The command will output these variables (assuming the infrastructure is up)
+<br>
+<img src="readme-images/tf-output.png" alt="down-tf" width=30% height=30%>
+<br>
+
+The endpoint (long URL/long green square covering), will be the link used to access the solution.
+
 
 ### Undeploy Solution
 The following command will destroy all AWS service, meaning the solution will not be avaliable to access. If you want to redeploy the solution, run [`make bootstrap`](#Bootstrap) ***then*** [`make tf-init`](#Initialise-Terraform-Repo) ***then*** [`make tf-validate`](#Validate-and-Format) ***then*** [`make tf-plan`](#Terraform-plan) ***then*** [`make up`](#Deploy-solution).
