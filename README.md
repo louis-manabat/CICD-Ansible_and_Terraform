@@ -1,10 +1,10 @@
-## Student: Louis Manabat
+# Student: Louis Manabat
 **ID: s3719633**
 
-### Analysis of the problem
+## Analysis of the problem
 The process of creating an artefact has been automated to make it easier for the development team. With this now out of the way, there are new challenges that they face which is deploying the solution. There is a lot of manual workload present, which also means a lot of room for human error.
 
-### Explain and justify the solution
+## Explain and justify the solution
 The solution uses several tools to deploy the solution. The process will be semi-automated in the sense that the infrastructure and deployment will be fully automated, but to get it running, several Makefile commands need to be run to fully deploy the solution.
 
 Tools:
@@ -20,9 +20,39 @@ CircleCI: CircleCI was used to automate the packing of the artefact, from doing 
 
 
 
-### How to deploy the solutiion
+## How to deploy the solutiion
 
+Please note before getting started you must have an AWS account to get started. The way this tutorial will do it will differ from how you may do it, so please keep that in mind.
 
+### Pre-requisites
+
+Before we get started, please make sure the following packages are installed:
+1. curl
+2. wget
+3. make
+4. dos2unix
+5. Terraform
+6. Ansible 
+
+### Updating system 
+    sudo apt update -y
+    sudo apt upgrade -y
+    sudo apt install curl make wget dos2unix -y
+
+### Installing Node.js (For NPM)
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+    sudo apt-get install nodejs -y
+
+### Installing Terraform
+    cd /tmp/
+    wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip
+    unzip terraform_0.15.4_linux_amd64.zip
+    sudo mv terraform user/local/bin
+
+### Installing Ansible
+    sudo apt install software-properties-common -y
+    sudo add-apt-repository --yes --update ppa:ansible/ansible
+    sudo apt install ansible -y
 
 
 # About Simple Todo App
