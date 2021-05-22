@@ -21,7 +21,7 @@ CircleCI: CircleCI was used to automate the packing of the artefact, from doing 
 
 ## How to deploy the solutiion
 
-Please note before getting started you must have an AWS account to get started. The way this tutorial will do it will differ from how you may do it, so please keep that in mind.
+Please note before getting started you must have an AWS account to get started. The way this tutorial will do it will differ from how you may do it, so please keep that in mind. We will be running this in VirtualBox using an Ubuntu 20.04 image.
 
 ### Pre-requisites
 
@@ -59,7 +59,7 @@ You may choose to install these packages [**manually**](#Manual-installation), o
     sudo apt install ansible -y
 
 
-### Semi-automatic installation (Each line is a new command)
+### Semi-automatic installation
 ##### Please note that each line is a new command
 #### Please run this command before starting the rest of the process
     sudo apt update -y
@@ -84,6 +84,12 @@ Upon entering the next page, press the **Account Details** button and you will b
 <br>
 <img src="readme-images/aws-account-status.png" alt="AWS-Edu-MyClass" width=50% height=50%>
 <img src="readme-images/aws-credentials.png" alt="AWS-Edu-MyClass" width=50% height=50%>
+<br>
+
+After doing this, open up a new tab in your terminal and run the command `mkdir ~/.aws` then run `vim ~/.aws/credentials` then press **INS** to activate insert mode then **Shift + INS** to paste the credentials. Follow this up with pressing **CTRL + C** then type in `:wq` to save and exit vim.
+<br>
+<img src="readme-images/aws-credentials-vim.png" alt="AWS-Edu-MyClass" width=50% height=50%>
+<img src="readme-images/aws-credentials-vim-2.png" alt="AWS-Edu-MyClass" width=50% height=50%>
 
 # About Simple Todo App
 
