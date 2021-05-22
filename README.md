@@ -1,5 +1,7 @@
 # Student: Louis Manabat (ID: s3719633)
 
+## Contents Page:
+
 ## Analysis of the problem
 The process of creating an artefact has been automated to make it easier for the development team. With this now out of the way, there are new challenges that they face which is deploying the solution. There is a lot of manual workload present, which also means a lot of room for human error.
 
@@ -32,7 +34,7 @@ Before we get started, please make sure the following packages are installed:
 6. Terraform
 7. Ansible 
 
-You may choose to install these packages manually, or do it automatically via the make command
+You may choose to install these packages [**manually**](#Manual-installation-(Each-line-is-a-new-command)), or do it [**automatically**](#Semi-automatic-installation-(Each-line-is-a-new-command)) via the make command
 
 ### Manual installation (Each line is a new command)
 #### Updating system 
@@ -56,7 +58,7 @@ You may choose to install these packages manually, or do it automatically via th
     sudo apt install ansible -y
 
 
-### Semi-automatic installation
+### Semi-automatic installation (Each line is a new command)
 
 #### Please run this command before starting the rest of the process
     sudo apt update -y
@@ -68,6 +70,10 @@ You may choose to install these packages manually, or do it automatically via th
     make install-nodejs
     make install-tf
     make install-ansible
+
+
+### Setting up AWS Credentials
+
 
 
 # About Simple Todo App
