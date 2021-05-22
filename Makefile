@@ -5,6 +5,11 @@ install-deps:
     sudo apt upgrade -y
     sudo apt install curl make wget dos2unix -y
 
+install-nodejs:
+	cd /tmp/
+	curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+    sudo apt-get install nodejs -y
+
 up:
 	cd infra && terraform apply --auto-approve
 	cd ansible && ./scripts/run-ansible.sh
