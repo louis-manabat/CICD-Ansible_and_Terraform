@@ -1,5 +1,8 @@
 .PHONY: up down tf-validate bootstrap ssh-gen tf-init pack install-ansible
 
+output:
+	cd infra && terrform output
+
 install-deps:
 	sudo apt install vim curl wget dos2unix -y
 
