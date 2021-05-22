@@ -15,6 +15,7 @@ install-tf:
     sudo mv terraform user/local/bin
 
 install-ansible:
+	cd /tmp/
 	sudo apt install software-properties-common -y
     sudo add-apt-repository --yes --update ppa:ansible/ansible
     sudo apt install ansible -y
