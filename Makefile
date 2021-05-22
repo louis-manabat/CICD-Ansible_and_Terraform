@@ -1,4 +1,4 @@
-.PHONY: up down tf-validate bootstrap ssh-gen tf-init pack
+.PHONY: up down tf-validate bootstrap ssh-gen tf-init pack install-ansible
 
 install-deps:
 	sudo apt update -y
@@ -15,6 +15,11 @@ install-tf:
 	wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip
     unzip terraform_0.15.4_linux_amd64.zip
     sudo mv terraform user/local/bin
+
+install-ansible:
+	sudo apt install software-properties-common -y
+    sudo add-apt-repository --yes --update ppa:ansible/ansible
+    sudo apt install ansible -y
 
 up:
 	cd infra && terraform apply --auto-approve
