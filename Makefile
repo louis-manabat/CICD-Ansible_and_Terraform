@@ -10,6 +10,12 @@ install-nodejs:
 	curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
     sudo apt-get install nodejs -y
 
+install-tf:
+	cd /tmp/
+	wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip
+    unzip terraform_0.15.4_linux_amd64.zip
+    sudo mv terraform user/local/bin
+
 up:
 	cd infra && terraform apply --auto-approve
 	cd ansible && ./scripts/run-ansible.sh
