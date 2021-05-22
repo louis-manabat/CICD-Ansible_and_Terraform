@@ -1,5 +1,4 @@
-# Student: Louis Manabat
-**ID: s3719633**
+# Student: Louis Manabat (ID: s3719633)
 
 ## Analysis of the problem
 The process of creating an artefact has been automated to make it easier for the development team. With this now out of the way, there are new challenges that they face which is deploying the solution. There is a lot of manual workload present, which also means a lot of room for human error.
@@ -18,8 +17,6 @@ AWS: This is the service where the client wants to deploy the solution onto. Ser
 
 CircleCI: CircleCI was used to automate the packing of the artefact, from doing linting and vulnerability checks to making a packed solution. It will also be used to fully automate the deployment process.
 
-
-
 ## How to deploy the solutiion
 
 Please note before getting started you must have an AWS account to get started. The way this tutorial will do it will differ from how you may do it, so please keep that in mind.
@@ -31,28 +28,46 @@ Before we get started, please make sure the following packages are installed:
 2. wget
 3. make
 4. dos2unix
-5. Terraform
-6. Ansible 
+5. vim
+6. Terraform
+7. Ansible 
 
-### Updating system 
+You may choose to install these packages manually, or do it automatically via the make command
+
+### Manual installation (Each line is a new command)
+#### Updating system 
     sudo apt update -y
     sudo apt upgrade -y
-    sudo apt install curl make wget dos2unix -y
+    sudo apt install curl make wget vim dos2unix -y
 
-### Installing Node.js (For NPM)
+#### Installing Node.js (For NPM)
     curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
     sudo apt-get install nodejs -y
 
-### Installing Terraform
+#### Installing Terraform
     cd /tmp/
     wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip
     unzip terraform_0.15.4_linux_amd64.zip
     sudo mv terraform user/local/bin
 
-### Installing Ansible
+#### Installing Ansible
     sudo apt install software-properties-common -y
     sudo add-apt-repository --yes --update ppa:ansible/ansible
     sudo apt install ansible -y
+
+
+### Semi-automatic installation
+
+#### Please run this command before starting the rest of the process
+    sudo apt update -y
+    sudo apt upgrade -y
+    sudo apt install make -y
+
+#### After successfully running that command, run the following commands (Each line is a new command)
+    make install-deps
+    make install-nodejs
+    make install-tf
+    make install-ansible
 
 
 # About Simple Todo App
