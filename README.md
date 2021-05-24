@@ -12,7 +12,6 @@
     - [Running commands](#Running-commands)
         - [Pack](#Pack)
         - [SSH-key generation](#SSH-key-generation)
-        - [Bootstrap](#Bootstrap)
         - [Initialise Terraform Repo](#Initialise-Terraform-Repo)
         - [Validate and Format](#Validate-and-Format)
         - [Terraform plan](#Terraform-plan)
@@ -111,7 +110,7 @@ After doing this, open up a new tab in your terminal and run the command `mkdir 
 <img src="readme-images/aws-credentials-vim-2.png" alt="AWS-cred-vim-2" width=50% height=50%>
 
 ## Running commands
-After finishing the dependencies, go back into the root directory of the GitHub repository (where you have gotten this document you are reading) and enter the following commands:\
+After finishing the dependencies, go back into the root directory of the GitHub repository (where you have gotten this document you are reading) and enter the following commands:
 
 ### Pack
 The following command will pack and zip the solution into a tgz directory, which will be in the *ansible/files* directory.
@@ -122,14 +121,6 @@ The following command will pack and zip the solution into a tgz directory, which
 The following command will create a SSH key which will be used when connecting to the Terraform infrastructure Virtual Machine later on.
 
     make ssh-gen
-
-### Bootstrap
-The following command will initialise and apply the Bootstrap code for DynamoDB, S3 bucket and option group for DynamoDB. You will only need to run this command once until you run [`make down`(#down)] (which we will cover later on).
-
-    make bootstrap
-You should get an output like this upon succession.
-<br>
-<img src="readme-images/tf-bootstrap.png" alt="AWS-tf-bootstrap" width=50% height=50%>
 
 ### Initialise Terraform Repo
 The following command will initialise and apply the infrastructure code that will run the solution. You will only need to run this command once until you run [`make down`(#down)] (which we will cover later on).
@@ -178,9 +169,8 @@ The command will output these variables (assuming the infrastructure is up)
 
 The endpoint (long URL/long green square covering), will be the link used to access the solution. The output below that is the public IP address, and if you combine the IP with the port 5000 (i.e. '3.333.333.333:5000'),  it will also be a link to be used to access the solution.
 
-
 ### Undeploy Solution
-The following command will destroy all AWS service, meaning the solution will not be avaliable to access. If you want to redeploy the solution, run [`make bootstrap`](#Bootstrap) ***then*** [`make tf-init`](#Initialise-Terraform-Repo) ***then*** [`make tf-validate`](#Validate-and-Format) ***then*** [`make tf-plan`](#Terraform-plan) ***then*** [`make up`](#Deploy-solution).
+The following command will destroy all AWS service, meaning the solution will not be avaliable to access. If you want to redeploy the solution, run [`make tf-init`](#Initialise-Terraform-Repo) ***then*** [`make tf-validate`](#Validate-and-Format) ***then*** [`make tf-plan`](#Terraform-plan) ***then*** [`make up`](#Deploy-solution).
 
     make down
 Successfully running the command should give these two outputs.
@@ -188,10 +178,9 @@ Successfully running the command should give these two outputs.
 Infrastructure
 <br>
 <img src="readme-images/down-tf.png" alt="down-tf" width=30% height=30%>
-<br>
-Bootstrap
-<br>
-<img src="readme-images/down-bootstrap.png" alt="down-bootstrap" width=30% height=30%>
+
+### Bootstrap
+The following command will create some files to make a remote backend. Run the command once only and them copy the two values into the respective variables in main.tf in the infra directory.
 
 # About Simple Todo App
 
