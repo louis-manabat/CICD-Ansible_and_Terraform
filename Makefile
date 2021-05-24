@@ -24,14 +24,11 @@ install-ansible:
 	sudo apt install ansible -y
 
 up:
-	cd infra && terraform apply --auto-approve \
-								-var='tfstate=$(cd boorstrap && terraform state_bucket_name | tr -d '"')' \
-								-var='locktable=$(cd bootstrap && terraform dynamoDb_lock_table_name | tr -d '"''
+	cd infra && terraform apply --auto-approve
 	cd ansible && dos2unix ./scripts/run-ansible.sh && ./scripts/run-ansible.sh
 
 down:
 	cd infra && terraform destroy --auto-approve
-	cd bootstrap && terraform destroy --auto-approve
 
 tf-plan:
 	cd infra && terraform plan
