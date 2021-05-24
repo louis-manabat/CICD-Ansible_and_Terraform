@@ -176,7 +176,7 @@ The command will output these variables (assuming the infrastructure is up)
 <img src="readme-images/tf-output.png" alt="down-tf" width=30% height=30%>
 <br>
 
-The endpoint (long URL/long green square covering), will be the link used to access the solution.
+The endpoint (long URL/long green square covering), will be the link used to access the solution. The output below that is the public IP address, and if you combine the IP with the port 5000 (i.e. '3.333.333.333:5000'),  it will also be a link to be used to access the solution.
 
 
 ### Undeploy Solution
