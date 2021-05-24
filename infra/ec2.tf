@@ -90,7 +90,7 @@ resource "aws_lb_listener" "todo_app_lb_listener" {
 }
 
 resource "aws_instance" "todo_app_ec2" {
-  ami                         = "ami-0d5eff06f840b45e9"
+  ami                         = data.aws_ami.latest_image.image_id
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.private_az1.id
   associate_public_ip_address = true
