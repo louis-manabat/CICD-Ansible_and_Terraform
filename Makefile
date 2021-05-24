@@ -12,9 +12,9 @@ install-nodejs:
 	sudo apt-get install nodejs -y
 
 install-tf:
-	cd /tmp
-	wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip
-	unzip terraform_0.15.4_linux_amd64.zip
+	cd /tmp && \
+	wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip && \
+	unzip terraform_0.15.4_linux_amd64.zip && \
 	sudo mv terraform /usr/local/bin
 
 install-ansible:
