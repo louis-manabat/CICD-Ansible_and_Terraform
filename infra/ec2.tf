@@ -73,7 +73,7 @@ resource "aws_lb" "todo_app_lb" {
 
 resource "aws_lb_target_group" "todo_app_lb_tg" {
   name     = "todo-app-lb-target-group"
-  port     = 80
+  port     = 5000
   protocol = "HTTP"
   vpc_id   = aws_vpc.vpc.id
 }
@@ -101,4 +101,9 @@ resource "aws_instance" "todo_app_ec2" {
   tags = {
     Name = "TodoApp"
   }
+}
+
+resource "aws_lb_target_group_attachment" "todo_app_lb_tg_attach" {
+  target_group_arn = aws_lb_target_group.todo_app_lb_tg.arn
+  target_id        = aws_instance.todo_app_ec2[0].id
 }
