@@ -12,6 +12,7 @@
     - [Running commands](#Running-commands)
         - [Pack](#Pack)
         - [SSH-key generation](#SSH-key-generation)
+        - [Bootstrap](#Bootstrap)
         - [Initialise Terraform Repo](#Initialise-Terraform-Repo)
         - [Validate and Format](#Validate-and-Format)
         - [Terraform plan](#Terraform-plan)
@@ -122,6 +123,19 @@ The following command will create a SSH key which will be used when connecting t
 
     make ssh-gen
 
+### Bootstrap
+The following command will create some files to make a remote backend. Run the command **once only** and them copy the two values into the respective variables in *main.tf* in the infra directory.
+
+    make bootstrap
+You should first see these variables after completing `make bootstrap`.
+<br>
+<img src="readme-images/bootstrap-vars-1.png" alt="boostrap-vars" width=30% height=30%>
+<br>
+
+Following that, you will copy the bottom two variables into the *main.tf* file. You should be only changing the **bucket** (using the **state_bucket_name** variable) and **dynamodb_Table** (using the **dynamoDb_lock_table_name**) variables.
+<br>
+<img src="readme-images/bootstrap-vars-2.png" alt="boostrap-vars" width=30% height=30%>
+
 ### Initialise Terraform Repo
 The following command will initialise and apply the infrastructure code that will run the solution. You will only need to run this command once until you run [`make down`(#down)] (which we will cover later on).
 
@@ -169,6 +183,7 @@ The command will output these variables (assuming the infrastructure is up)
 
 The endpoint (long URL/long green square covering), will be the link used to access the solution. The output below that is the public IP address, and if you combine the IP with the port 5000 (i.e. '3.333.333.333:5000'),  it will also be a link to be used to access the solution.
 
+
 ### Undeploy Solution
 The following command will destroy all AWS service, meaning the solution will not be avaliable to access. If you want to redeploy the solution, run [`make tf-init`](#Initialise-Terraform-Repo) ***then*** [`make tf-validate`](#Validate-and-Format) ***then*** [`make tf-plan`](#Terraform-plan) ***then*** [`make up`](#Deploy-solution).
 
@@ -178,9 +193,6 @@ Successfully running the command should give these two outputs.
 Infrastructure
 <br>
 <img src="readme-images/down-tf.png" alt="down-tf" width=30% height=30%>
-
-### Bootstrap
-The following command will create some files to make a remote backend. Run the command once only and them copy the two values into the respective variables in main.tf in the infra directory.
 
 # About Simple Todo App
 
