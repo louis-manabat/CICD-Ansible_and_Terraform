@@ -188,9 +188,7 @@ The endpoint (long URL/long green square covering), will be the link used to acc
 The following command will destroy all AWS service, meaning the solution will not be avaliable to access. If you want to redeploy the solution, run [`make tf-init`](#Initialise-Terraform-Repo) ***then*** [`make tf-validate`](#Validate-and-Format) ***then*** [`make tf-plan`](#Terraform-plan) ***then*** [`make up`](#Deploy-solution).
 
     make down
-Successfully running the command should give these two outputs.
-<br>
-Infrastructure
+Successfully running the command should give the output.
 <br>
 <img src="readme-images/down-tf.png" alt="down-tf" width=30% height=30%>
 
